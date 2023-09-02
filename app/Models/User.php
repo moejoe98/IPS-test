@@ -47,4 +47,13 @@ class User extends Authenticatable
     {
         return $this->hasMany(Comment::class);
     }
+    public function badges()
+    {
+        return $this->BelongsToMany(UserBadge::class);
+    }
+
+    public function achievements()
+    {
+        return $this->BelongsToMany(UserAchievement::class);
+    }
 }

@@ -22,6 +22,6 @@ class BadgeUnlockedListener
     public function handle(BadgeUnlocked $event): void
     {
         $user = $event->getUser();
-        $badge = $event->getBadge();
+        $badge = $event->getBadgeTitle();
     }
 }

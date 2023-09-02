@@ -4,7 +4,7 @@ namespace App\Listeners;
 
 use App\Events\AchievementUnlocked;
 use App\Events\CommentWritten;
-use App\Http\Actions\Comments\CheckForAchievementAction;
+use App\Http\Actions\Achievements\CheckForAchievementAction;
 use App\Services\Statistics\StatisticsService;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
@@ -37,10 +37,10 @@ class CommentWrittenListener
         $comment = $event->getComment();
         $user = $comment->user;
         $commentsCount = StatisticsService::addComment($user->id);
-        $achievement = $this->checkForAchievementAction->execute($user, $commentsCount);
+        $isAchievementUnlocked = $this->checkForAchievementAction->execute($user, $commentsCount);
 
-        if ($achievement) {
-            event(new AchievementUnlocked($achievement->title, $user));
+        if ($isAchievementUnlocked) {
+            event(new AchievementUnlocked($isAchievementUnlocked->title, $user));
         }
     }
 }

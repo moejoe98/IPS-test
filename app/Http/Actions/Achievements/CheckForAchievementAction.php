@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Actions\Comments;
+namespace App\Http\Actions\Achievements;
 
 use App\Services\Comments\CommentsService;
 use App\Services\Achievements\AchievementsService;

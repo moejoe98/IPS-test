@@ -11,17 +11,17 @@ class BadgeUnlocked
 {
     use Dispatchable, SerializesModels;
 
-    public $badge_name;
-    public $user ;
+    public $badgeTitle;
+    public $user;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(Badge $badge_name, User $user)
+    public function __construct(Badge $badgeTitle, User $user)
     {
-        $this->badge_name = $badge_name;
+        $this->badgeTitle = $badgeTitle;
         $this->user = $user;
     }
 
@@ -30,8 +30,8 @@ class BadgeUnlocked
         return $this->user;
     }
 
-    public function getBadge()
+    public function getBadgeTitle()
     {
-        return $this->badge_name;
+        return $this->badgeTitle;
     }
 }

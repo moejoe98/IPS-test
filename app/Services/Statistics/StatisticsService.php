@@ -13,4 +13,11 @@ class StatisticsService
             ->value('written_comments_number');
     }
 
+    public static function addAchievement($userId)
+    {
+        return UserStatistic::where('user_id', $userId)
+            ->increment('achievements_number')
+            ->value('achievements_number');
+    }
+
 }
