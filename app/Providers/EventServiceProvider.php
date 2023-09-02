@@ -21,6 +21,15 @@ class EventServiceProvider extends ServiceProvider
         LessonWatched::class => [
             LessonWatchedListener::class,
         ],
+        CommentWritten::class => [
+            CommentWrittenListener::class,
+        ],
+        BadgeUnlocked::class => [
+            BadgeUnlockedListener::class,
+        ],
+        AchievementUnlocked::class => [
+            AchievementUnlockedListener::class,
+        ],
     ];
 
     /**
