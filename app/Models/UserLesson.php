@@ -19,7 +19,7 @@ class UserLesson extends Model
         'watched'
     ];
   /**
-     * Get the user that have the lesson.
+     * Get the user that have the lessons.
      */
     public function user()
     {

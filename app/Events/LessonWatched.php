@@ -24,4 +24,14 @@ class LessonWatched
         $this->lesson = $lesson;
         $this->user = $user;
     }
+
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    public function getLesson()
+    {
+        return $this->lesson;
+    }
 }
