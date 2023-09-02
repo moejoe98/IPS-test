@@ -20,4 +20,12 @@ class StatisticsService
             ->value('achievements_number');
     }
 
+
+    public static function addLessonWatched($userId)
+    {
+        return UserStatistic::where('user_id', $userId)
+            ->increment('watched_lessons_number')
+            ->value('watched_lessons_number');
+    }
+
 }

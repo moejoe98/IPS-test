@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Actions\Achievements;
+namespace App\Http\Actions\Achievements\Comments;
 
-use App\Services\Comments\CommentsService;
 use App\Services\Achievements\AchievementsService;
 
-class CheckForAchievementAction
+class CheckForCommentsAchievementAction
 {
     public function execute($user, $commentsCount)
     {
