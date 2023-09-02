@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class UserAchievement extends Model
+class UserBadge extends Model
 {
     use HasFactory;
     /**
@@ -15,12 +15,11 @@ class UserAchievement extends Model
      */
     protected $fillable = [
         'user_id',
-        'achievement_id'
+        'badge_id'
     ];
 
-    
-    /**
-     * Get the user that have the achievement.
+     /**
+     * Get the user that have the badge.
      */
     public function user()
     {
@@ -28,10 +27,10 @@ class UserAchievement extends Model
     }
 
      /**
-     * Get the achievement.
+     * Get the badge.
      */
-    public function achievement()
+    public function badge()
     {
-        return $this->belongsTo(Achievement::class);
+        return $this->belongsTo(Badge::class);
     }
 }
