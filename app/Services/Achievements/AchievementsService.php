@@ -20,4 +20,26 @@ class AchievementsService
       return Achievement::where('type', 'lesson')->get();
     });
   }
+
+  public static function unlockedAchievements($user)
+  {
+    return $user->achievements()->pluck('title')->toArray();
+  }
+
+  public static function currentArchievement($user)
+  {
+    return $user->UserAchievement()
+      ->orderBy('created_at', 'desc')
+      ->first();
+  }
+
+  public static function nextAchievement($user)
+  {
+    $currentAchievement = self::currentArchievement($user);
+    return Achievement::where('rank', '>', $currentAchievement->rank)
+      ->orderBy('rank', 'asc')
+      ->first();
+  }
+
+
 }
