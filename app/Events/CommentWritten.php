@@ -21,4 +21,9 @@ class CommentWritten
     {
         $this->comment = $comment;
     }
+
+    public function getComment()
+    {
+        return $this->comment;
+    }
 }
