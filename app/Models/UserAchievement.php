@@ -18,6 +18,8 @@ class UserAchievement extends Model
         'achievement_id'
     ];
 
+    protected $with = ['achievement'];
+
     
     /**
      * Get the user that have the achievement.

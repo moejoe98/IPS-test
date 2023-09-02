@@ -2,18 +2,31 @@
 
 namespace App\Listeners;
 
+use App\Events\AchievementUnlocked;
 use App\Events\CommentWritten;
+use App\Http\Actions\Comments\CheckForAchievementAction;
+use App\Services\Statistics\StatisticsService;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
+use App\Services\Comments\CommentsService;
 
 class CommentWrittenListener
 {
     /**
-     * Create the event listener.
+     * The CheckForAchievementAction instance.
+     *
+     * @var CheckForAchievementAction
      */
-    public function __construct()
+    private $checkForAchievementAction;
+
+    /**
+     * Create the event listener.
+     *
+     * @param CheckForAchievementAction $checkForAchievementAction
+     */
+    public function __construct(CheckForAchievementAction $checkForAchievementAction)
     {
-        //
+        $this->checkForAchievementAction = $checkForAchievementAction;
     }
 
     /**
@@ -22,5 +35,12 @@ class CommentWrittenListener
     public function handle(CommentWritten $event): void
     {
         $comment = $event->getComment();
+        $user = $comment->user;
+        $commentsCount = StatisticsService::addComment($user->id);
+        $achievement = $this->checkForAchievementAction->execute($user, $commentsCount);
+
+        if ($achievement) {
+            event(new AchievementUnlocked($achievement->title, $user));
+        }
     }
 }

@@ -11,17 +11,17 @@ class AchievementUnlocked
 {
     use Dispatchable, SerializesModels;
 
-    public $achievement_name ;
-    public $user ;
+    public $achievementTitle;
+    public $user;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(Achievement $achievement_name, User $user)
+    public function __construct($achievementTitle, User $user)
     {
-        $this->achievement_name = $achievement_name;
+        $this->achievementTitle = $achievementTitle;
         $this->user = $user;
     }
 
@@ -30,8 +30,8 @@ class AchievementUnlocked
         return $this->user;
     }
 
-    public function getAchievement()
+    public function getAchievementTitle()
     {
-        return $this->achievement_name;
+        return $this->achievementTitle;
     }
 }
