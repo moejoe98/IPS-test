@@ -2,8 +2,8 @@
 
 namespace App\Http\Actions\Achievements\Lessons;
 
-use App\Services\Comments\CommentsService;
 use App\Services\Achievements\AchievementsService;
+use App\Services\Lessons\LessonsService;
 
 class CheckForLessonsAchievementAction
 {
@@ -12,7 +12,7 @@ class CheckForLessonsAchievementAction
         $lessonAchievements = AchievementsService::getLessonsAchievements();
         foreach ($lessonAchievements as $achievement) {
             if ($lessonsCount == $achievement->rank) {
-                $user->achievements()->attach($achievement->id);
+                AchievementsService::achievementUnlocked($user->id, $achievement->id);
                 return $achievement;
             }
         }
