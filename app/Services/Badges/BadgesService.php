@@ -3,6 +3,7 @@
 namespace App\Services\Badges;
 
 use App\Models\Badge;
+use App\Models\UserBadge;
 
 class BadgesService
 {
@@ -38,5 +39,11 @@ class BadgesService
         ];
     }
 
-
+    public static function badgeUnlocked($userId, $badgeId)
+    {
+        UserBadge::create([
+            'user_id' => $userId,
+            'badge_id' => $badgeId,
+        ]);
+    }
 }

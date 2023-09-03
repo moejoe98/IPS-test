@@ -12,7 +12,7 @@ class CheckForBadgesAction
         $badges = BadgesService::getBadges();
         foreach ($badges as $badge) {
             if ($achievementCount == $badge->rank) {
-                $user->badges()->attach($badge->id);
+                BadgesService::badgeUnlocked($user->id, $badge->id);
                 return $badge;
             }
         }

@@ -10,7 +10,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('statistics_user', function (Blueprint $table) {
+        Schema::create('user_statistics', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
             $table->integer('watched_lessons_number')->default(0);
@@ -26,6 +26,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('statistics_user');
+        Schema::dropIfExists('user_statistics');
     }
 };

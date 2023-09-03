@@ -3,6 +3,7 @@
 namespace App\Services\Achievements;
 
 use App\Models\Achievement;
+use App\Models\UserAchievement;
 use Illuminate\Support\Facades\Cache;
 
 class AchievementsService
@@ -41,5 +42,12 @@ class AchievementsService
       ->first();
   }
 
+  public static function achievementUnlocked($userId, $achievementId)
+  {
+    UserAchievement::create([
+      'user_id' => $userId,
+      'achievement_id' => $achievementId,
+    ]);
+  }
 
 }

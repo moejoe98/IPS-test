@@ -13,7 +13,7 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::table('statistics_user', function (Blueprint $table) {
+        Schema::table('user_statistics', function (Blueprint $table) {
             $table->integer('achievements_number')->default(0);
             ;
         });
@@ -26,7 +26,7 @@ return new class extends Migration {
      */
     public function down()
     {
-        Schema::table('statistics_user', function (Blueprint $table) {
+        Schema::table('user_statistics', function (Blueprint $table) {
             //
         });
     }

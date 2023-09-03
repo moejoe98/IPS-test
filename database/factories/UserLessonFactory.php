@@ -2,18 +2,21 @@
 
 namespace Database\Factories;
 
+use App\Models\Achievement;
+use App\Models\Badge;
+use App\Models\Lesson;
 use App\Models\User;
-use App\Models\Comment;
+use App\Models\UserLesson;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class CommentFactory extends Factory
+class UserLessonFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Comment::class;
+    protected $model = UserLesson::class;
 
     /**
      * Define the model's default state.
@@ -23,8 +26,9 @@ class CommentFactory extends Factory
     public function definition()
     {
         return [
-            'body' => $this->faker->text(),
             'user_id' => User::all()->random()->id,
+            'lesson_id' => Lesson::all()->random()->id,
+            'watched' => fake()->boolean()
         ];
     }
 }

@@ -47,13 +47,19 @@ class User extends Authenticatable
     {
         return $this->hasMany(Comment::class);
     }
+
+    public function lessons()
+    {
+        return $this->hasMany(UserLesson::class);
+    }
+
     public function badges()
     {
-        return $this->BelongsToMany(UserBadge::class, 'user_badges', 'user_id', 'badge_id');
+        return $this->hasMany(UserBadge::class);
     }
 
     public function achievements()
     {
-        return $this->belongsToMany(UserAchievement::class, 'user_achievements', 'user_id', 'achievement_id');
+        return $this->hasMany(UserAchievement::class);
     }
 }

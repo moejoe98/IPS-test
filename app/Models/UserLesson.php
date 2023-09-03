@@ -18,12 +18,12 @@ class UserLesson extends Model
         'lesson_id',
         'watched'
     ];
-  /**
+    /**
      * Get the user that have the lessons.
      */
     public function user()
     {
         return $this->belongsTo(User::class);
     }
-}
 
+}
