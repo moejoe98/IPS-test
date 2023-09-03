@@ -24,22 +24,47 @@ class AchievementsService
 
   public static function unlockedAchievements($user)
   {
-    return $user->achievements()->pluck('title')->toArray();
+    $achievements = $user->achievements()->get();
+    $achievementTitles = $achievements->map(function ($userAchievement) {
+      return $userAchievement->achievement->title;
+    })->toArray();
+    return $achievementTitles;
   }
 
-  public static function currentArchievement($user)
+  public static function currentAchievementByType($user, $type)
   {
-    return $user->UserAchievement()
+    $res = $user->achievements()
+      ->whereHas('achievement', function ($query) use ($type) {
+        $query->where('type', $type);
+      })
       ->orderBy('created_at', 'desc')
       ->first();
+
+    if ($res) {
+      return $res->achievement->rank;
+    } else {
+      return 0;
+    }
+
   }
 
-  public static function nextAchievement($user)
+  public static function nextAchievementByType($user, $type)
   {
-    $currentAchievement = self::currentArchievement($user);
-    return Achievement::where('rank', '>', $currentAchievement->rank)
+    $currentCommentAchievementRank = self::currentAchievementByType($user, $type);
+    return Achievement::where('type', $type)->where('rank', '>', $currentCommentAchievementRank)
       ->orderBy('rank', 'asc')
       ->first();
+  }
+
+  public static function nextAvailableAchievements($user)
+  {
+    $nextCommentsAchievement = self::nextAchievementByType($user, 'comment');
+    $nextLessonsAchievement = self::nextAchievementByType($user, 'lesson');
+    return [
+      'next_lesson_achievement' => $nextLessonsAchievement ? $nextLessonsAchievement->title : $nextLessonsAchievement,
+      'next_comment_achievement' => $nextCommentsAchievement ? $nextCommentsAchievement->title : $nextCommentsAchievement
+    ];
+
   }
 
   public static function achievementUnlocked($userId, $achievementId)

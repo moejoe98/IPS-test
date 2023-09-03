@@ -11,7 +11,7 @@ class UserBadgeAchievementsInfo
     public function execute($user)
     {
         $unlockedAchievements = AchievementsService::unlockedAchievements($user);
-        $nextAvailableAchievements = AchievementsService::nextAchievement($user);
+        $nextAvailableAchievements = AchievementsService::nextAvailableAchievements($user);
 
         $UserBadgeDetails = BadgesService::userBadgeDetails($user);
 

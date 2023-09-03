@@ -14,7 +14,7 @@ class BadgesService
 
     public static function getCurrentBadges($user)
     {
-        return $user->userBadges()
+        return $user->badges()
             ->orderBy('created_at', 'desc')
             ->first();
     }
@@ -22,19 +22,17 @@ class BadgesService
     public static function userBadgeDetails($user)
     {
         $currentBadge = self::getCurrentBadges($user);
-
         $currentRank = $currentBadge->badge->rank;
 
         $nextBadge = Badge::where('rank', '>', $currentRank)
             ->orderBy('rank', 'asc')
             ->first();
 
-
         $remainingToNextBadge = $nextBadge ? $nextBadge->rank - $currentRank : 0;
 
         return [
-            'nextBadge' => $nextBadge ? $nextBadge->title : null,
-            'currentBadge' => $currentBadge,
+            'nextBadge' => $nextBadge ? $nextBadge->title : $nextBadge,
+            'currentBadge' => $currentBadge->badge->title,
             'remainingToUnlock' => $remainingToNextBadge
         ];
     }
