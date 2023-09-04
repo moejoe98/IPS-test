@@ -19,17 +19,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $lessons = Lesson::factory()
-            ->count(20)
-            ->create();
-
-        $users = User::factory()
-            ->count(20)
-            ->create();
-
-        $comments = Comment::factory()
-            ->count(20)
-            ->create();
 
         $this->call([
             AchievementsSeeder::class
@@ -39,20 +28,13 @@ class DatabaseSeeder extends Seeder
             BadgeSeeder::class
         ]);
 
-        $userAchievement = UserAchievement::factory()
-            ->count(20)
+        $this->call([
+            UserSeeder::class
+        ]);
+
+        Lesson::factory()
+            ->count(10)
             ->create();
 
-        $userBadge = UserBadge::factory()
-            ->count(20)
-            ->create();
-
-        $userLesson = UserLesson::factory()
-            ->count(20)
-            ->create();
-
-        $userStatistics = UserStatistic::factory()
-            ->count(20)
-            ->create();
     }
 }
