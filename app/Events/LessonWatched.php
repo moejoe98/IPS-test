@@ -19,7 +19,7 @@ class LessonWatched
      *
      * @return void
      */
-    public function __construct(Lesson $lesson, User $user)
+    public function __construct($lesson, User $user)
     {
         $this->lesson = $lesson;
         $this->user = $user;

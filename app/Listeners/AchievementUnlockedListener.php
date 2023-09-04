@@ -43,7 +43,7 @@ class AchievementUnlockedListener
         $achievementsNumber = StatisticsService::addAchievement($user->id);
         $isBadgeUnlocked = $this->checkForBadgesAction->execute($user, $achievementsNumber);
         if ($isBadgeUnlocked) {
-            event(new BadgeUnlocked($isBadgeUnlocked->title, $user));
+            BadgeUnlocked::dispatch($isBadgeUnlocked->title, $user);
         }
     }
 }

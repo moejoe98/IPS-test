@@ -7,7 +7,6 @@ use App\Events\LessonWatched;
 use App\Services\Statistics\StatisticsService;
 use App\Http\Actions\Achievements\Lessons\CheckForLessonsAchievementAction;
 
-
 class LessonWatchedListener
 { /**
   * The CheckForLessonsAchievementAction instance.
@@ -35,7 +34,8 @@ class LessonWatchedListener
         $isAchievementUnlocked = $this->CheckForLessonsAchievementAction->execute($user, $lessonsWatchedCount);
 
         if ($isAchievementUnlocked) {
-            event(new AchievementUnlocked($isAchievementUnlocked->title, $user));
+            AchievementUnlocked::dispatch($isAchievementUnlocked->title, $user);
+
         }
 
     }

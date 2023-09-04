@@ -6,6 +6,7 @@ use App\Events\AchievementUnlocked;
 use App\Events\CommentWritten;
 use App\Http\Actions\Achievements\Comments\CheckForCommentsAchievementAction;
 use App\Services\Statistics\StatisticsService;
+use Illuminate\Support\Facades\Log;
 
 class CommentWrittenListener
 {
@@ -33,12 +34,11 @@ class CommentWrittenListener
     {
         $comment = $event->getComment();
         $user = $comment->user;
-
         $commentsCount = StatisticsService::addComment($user->id);
         $isAchievementUnlocked = $this->checkForCommentsAchievementAction->execute($user, $commentsCount);
 
         if ($isAchievementUnlocked) {
-            event(new AchievementUnlocked($isAchievementUnlocked->title, $user));
+            AchievementUnlocked::dispatch($isAchievementUnlocked->title, $user);
         }
     }
 }

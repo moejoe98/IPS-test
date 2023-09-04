@@ -3,6 +3,18 @@
 namespace App\Providers;
 
 use Illuminate\Auth\Events\Registered;
+use App\Events\CommentWritten;
+use App\Listeners\CommentWrittenListener;
+
+use App\Events\LessonWatched;
+use App\Listeners\LessonWatchedListener;
+
+use App\Events\BadgeUnlocked;
+use App\Listeners\BadgeUnlockedListener;
+
+use App\Events\AchievementUnlocked;
+use App\Listeners\AchievementUnlockedListener;
+
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Event;

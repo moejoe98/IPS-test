@@ -19,7 +19,7 @@ class BadgeUnlocked
      *
      * @return void
      */
-    public function __construct(Badge $badgeTitle, User $user)
+    public function __construct($badgeTitle, User $user)
     {
         $this->badgeTitle = $badgeTitle;
         $this->user = $user;
