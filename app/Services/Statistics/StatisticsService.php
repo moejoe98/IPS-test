@@ -8,24 +8,25 @@ class StatisticsService
 {
     public static function addComment($userId)
     {
-        return UserStatistic::where('user_id', $userId)
-            ->increment('written_comments_number')
-            ->value('written_comments_number');
+        $inc = UserStatistic::where('user_id', $userId)->first();
+        $inc->increment('written_comments_number');
+        return $inc->written_comments_number;
+
     }
 
     public static function addAchievement($userId)
     {
-        return UserStatistic::where('user_id', $userId)
-            ->increment('achievements_number')
-            ->value('achievements_number');
+        $inc = UserStatistic::where('user_id', $userId)->first();
+        $inc->increment('achievements_number');
+        return $inc->achievements_number;
     }
 
 
     public static function addLessonWatched($userId)
     {
-        return UserStatistic::where('user_id', $userId)
-            ->increment('watched_lessons_number')
-            ->value('watched_lessons_number');
+        $inc = UserStatistic::where('user_id', $userId)->first();
+        $inc->increment('watched_lessons_number');
+        return $inc->watched_lessons_number;
     }
 
 }

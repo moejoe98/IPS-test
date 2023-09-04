@@ -3,13 +3,17 @@
 namespace App\Services\Badges;
 
 use App\Models\Badge;
+use App\Models\UserAchievement;
 use App\Models\UserBadge;
+use Cache;
 
 class BadgesService
 {
     public static function getBadges()
     {
-        return Badge::get();
+        return Cache::remember('badges', now()->addHours(1), function () {
+            return Badge::orderBy('rank', 'asc')->get();
+        });
     }
 
     public static function getCurrentBadges($user)
@@ -28,7 +32,9 @@ class BadgesService
             ->orderBy('rank', 'asc')
             ->first();
 
-        $remainingToNextBadge = $nextBadge ? $nextBadge->rank - $currentRank : 0;
+        $achievementsNumber = $user->achievements()->count();
+
+        $remainingToNextBadge = $nextBadge ? $nextBadge->rank - $achievementsNumber : 0;
 
         return [
             'nextBadge' => $nextBadge ? $nextBadge->title : $nextBadge,

@@ -5,20 +5,21 @@ namespace App\Services\Achievements;
 use App\Models\Achievement;
 use App\Models\UserAchievement;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Log;
 
 class AchievementsService
 {
   public static function getCommentsAchievements()
   {
     return Cache::remember('comment_achievements', now()->addHours(1), function () {
-      return Achievement::where('type', 'comment')->get();
+      return Achievement::where('type', 'comment')->orderBy('rank', 'asc')->get();
     });
   }
 
   public static function getLessonsAchievements()
   {
     return Cache::remember('lesson_achievements', now()->addHours(1), function () {
-      return Achievement::where('type', 'lesson')->get();
+      return Achievement::where('type', 'lesson')->orderBy('rank', 'asc')->get();
     });
   }
 
