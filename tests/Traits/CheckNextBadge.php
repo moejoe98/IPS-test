@@ -18,8 +18,11 @@ trait CheckNextBadge
         $currentIndex++;
         $nextBadge = $currentIndex >= count($badges) ? null : $badges[$currentIndex];
 
+        $nextBadge ? $remainingTillNextBadge = $nextBadge['rank'] - $numberOfAchievementsAdded : $remainingTillNextBadge = null;
+
         if ($nextBadge) {
             $response->assertJsonPath('next_badge', $nextBadge['title']);
+            $response->assertJsonPath('remaing_to_unlock_next_badge', $remainingTillNextBadge);
         }
     }
 

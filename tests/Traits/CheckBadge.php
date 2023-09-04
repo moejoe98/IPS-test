@@ -20,8 +20,10 @@ trait CheckBadge
             return $item['rank'] == $numberOfAchievementsAdded;
         });
 
-        if (!empty($isAchieved)) {
-            $this->assertStringContainsString($isAchieved[array_key_first($isAchieved)]['title'], $data->current_badge);
+        if (!empty($isBadgeUnlocked)) {
+            $this->assertStringContainsString($isBadgeUnlocked[array_key_first($isBadgeUnlocked)]['title'], $data->current_badge);
+
+            //Check next badge to unlock
             $this->checkNextBadge($numberOfAchievementsAdded, $badges, $response);
         }
 
