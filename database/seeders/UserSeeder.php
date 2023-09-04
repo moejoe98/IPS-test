@@ -18,6 +18,7 @@ class UserSeeder extends Seeder
             ->count(1)
             ->create();
 
+        //add default "Beginner" badge and userStatistics for each new user
         User::all()->each(function ($user) {
             UserBadge::create([
                 'user_id' => $user->id,

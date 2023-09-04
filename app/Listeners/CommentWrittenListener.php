@@ -34,9 +34,14 @@ class CommentWrittenListener
     {
         $comment = $event->getComment();
         $user = $comment->user;
+
+        //increment written_comments in statistics table
         $commentsCount = StatisticsService::addComment($user->id);
+
+        //check if achievemeny is unlocked
         $isAchievementUnlocked = $this->checkForCommentsAchievementAction->execute($user, $commentsCount);
 
+        //if achievement is unlocked, dispatch AchievementUnlocked Event
         if ($isAchievementUnlocked) {
             AchievementUnlocked::dispatch($isAchievementUnlocked->title, $user);
         }

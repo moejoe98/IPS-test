@@ -12,6 +12,8 @@ class CheckForLessonsAchievementAction
         $lessonAchievements = AchievementsService::getLessonsAchievements();
         foreach ($lessonAchievements as $achievement) {
             if ($lessonsCount == $achievement->rank) {
+
+                //Add achievement record to user_achievements table
                 AchievementsService::achievementUnlocked($user->id, $achievement->id);
                 return $achievement;
             }

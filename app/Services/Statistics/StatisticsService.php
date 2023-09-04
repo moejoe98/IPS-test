@@ -6,6 +6,7 @@ use App\Models\UserStatistic;
 
 class StatisticsService
 {
+    //increment written_comments_number for a user
     public static function addComment($userId)
     {
         $inc = UserStatistic::where('user_id', $userId)->first();
@@ -14,6 +15,7 @@ class StatisticsService
 
     }
 
+    //increment achievements_number for a user
     public static function addAchievement($userId)
     {
         $inc = UserStatistic::where('user_id', $userId)->first();
@@ -22,6 +24,7 @@ class StatisticsService
     }
 
 
+    //increment watched_lessons_number for a user
     public static function addLessonWatched($userId)
     {
         $inc = UserStatistic::where('user_id', $userId)->first();

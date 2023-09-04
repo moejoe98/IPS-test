@@ -27,7 +27,10 @@ trait CheckAchievement
             $this->assertContains($isAchieved[array_key_first($isAchieved)]['title'], $data->unlocked_achievements);
             $this->achievementCounter++;
 
+            //Checks for next achievement to unlock
             $this->checkNextAchievement($numberOfRanks, $achievements, $response, $type);
+
+            //check if badge unlocked
             $this->checkBadges($this->achievementCounter, $badges);
         }
 

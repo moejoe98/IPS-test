@@ -30,9 +30,13 @@ class LessonWatchedListener
         $user = $event->getUser();
         $lesson = $event->getLesson();
 
+        //increment lessons_watched in statistics table
         $lessonsWatchedCount = StatisticsService::addLessonWatched($user->id);
+
+        //Check if achievement unlocked
         $isAchievementUnlocked = $this->CheckForLessonsAchievementAction->execute($user, $lessonsWatchedCount);
 
+        //if achievement is unlocked, dispatch AchievementUnlocked Event
         if ($isAchievementUnlocked) {
             AchievementUnlocked::dispatch($isAchievementUnlocked->title, $user);
 

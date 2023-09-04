@@ -40,8 +40,13 @@ class AchievementUnlockedListener
         $user = $event->getUser();
         $achievement = $event->getAchievementTitle();
 
+        //increment achievements_number in statistics table
         $achievementsNumber = StatisticsService::addAchievement($user->id);
+
+        //Check if badge is unlocked
         $isBadgeUnlocked = $this->checkForBadgesAction->execute($user, $achievementsNumber);
+
+        //if achievement is unlocked, dispatch AchievementUnlocked Event
         if ($isBadgeUnlocked) {
             BadgeUnlocked::dispatch($isBadgeUnlocked->title, $user);
         }

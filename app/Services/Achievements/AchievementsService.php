@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Log;
 
 class AchievementsService
 {
+
+  //get achievements of type comments
   public static function getCommentsAchievements()
   {
     return Cache::remember('comment_achievements', now()->addHours(1), function () {
@@ -16,6 +18,8 @@ class AchievementsService
     });
   }
 
+
+  //get achievements of type Lessons
   public static function getLessonsAchievements()
   {
     return Cache::remember('lesson_achievements', now()->addHours(1), function () {
@@ -23,6 +27,7 @@ class AchievementsService
     });
   }
 
+  //Get user unlocked achievements
   public static function unlockedAchievements($user)
   {
     $achievements = $user->achievements()->get();
@@ -32,6 +37,7 @@ class AchievementsService
     return $achievementTitles;
   }
 
+  //get user current achievement by type
   public static function currentAchievementByType($user, $type)
   {
     $res = $user->achievements()
@@ -49,6 +55,7 @@ class AchievementsService
 
   }
 
+  //get user next achievement by type
   public static function nextAchievementByType($user, $type)
   {
     $currentCommentAchievementRank = self::currentAchievementByType($user, $type);
@@ -57,6 +64,8 @@ class AchievementsService
       ->first();
   }
 
+
+  //get user next available achievements
   public static function nextAvailableAchievements($user)
   {
     $nextCommentsAchievement = self::nextAchievementByType($user, 'comment');
@@ -68,6 +77,7 @@ class AchievementsService
 
   }
 
+  //add Achievement to user_achievement table
   public static function achievementUnlocked($userId, $achievementId)
   {
     UserAchievement::create([

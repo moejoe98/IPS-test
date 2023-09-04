@@ -23,6 +23,7 @@ class BadgesService
             ->first();
     }
 
+    //get user Badges details
     public static function userBadgeDetails($user)
     {
         $currentBadge = self::getCurrentBadges($user);
@@ -43,6 +44,7 @@ class BadgesService
         ];
     }
 
+    //add badge to user_badges table
     public static function badgeUnlocked($userId, $badgeId)
     {
         UserBadge::create([

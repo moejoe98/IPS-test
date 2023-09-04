@@ -11,6 +11,8 @@ class CheckForCommentsAchievementAction
         $commentAchievements = AchievementsService::getCommentsAchievements();
         foreach ($commentAchievements as $achievement) {
             if ($commentsCount == $achievement->rank) {
+
+                //Add achievement record to user_achievements table
                 AchievementsService::achievementUnlocked($user->id, $achievement->id);
                 return $achievement;
             }

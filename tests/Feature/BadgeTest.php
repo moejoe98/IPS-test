@@ -24,6 +24,7 @@ class BadgeTest extends TestCase
     }
     /**
      * This Test Insert Number of comments and lessons randomly, it checks achievements and badges.
+     * This test contains all scenarios 
      */
     public function testBadge(): void
     {
@@ -44,11 +45,15 @@ class BadgeTest extends TestCase
             if ($randomAction === 'comment' && $commentCounter <= $maxCommentsRank) {
                 $this->addComment();
                 sleep(1);
+
+                //Checks if achievement unlocked
                 $this->checkAchievements($commentCounter, $commentsAchievements, 'comment', $badges);
                 $commentCounter++;
             } elseif ($randomAction === 'lesson' && $lessonCounter <= $maxLessonsRank) {
                 $this->AddWatchLessons($lessonCounter);
                 sleep(1);
+
+                //Checks if achievement unlocked
                 $this->checkAchievements($lessonCounter, $lessonsAchievements, 'lesson', $badges);
                 $lessonCounter++;
             }
